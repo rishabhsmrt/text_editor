@@ -3,10 +3,10 @@ from tkinter.messagebox import showinfo
 from tkinter.filedialog import askopenfilename, asksaveasfilename 
 import os
 import pyttsx3
-#This comment is added by Piyush Patel
+
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-#this is second change
+
 def speak():
     global file
     engine.say(textarea.get(1.0, END))
@@ -24,11 +24,14 @@ def openfile():
     if file == "":
         file = None
     else:
-        root.title(os.path.basename(file) + " - Notepad")
-        textarea.delete(1.0,END)
-        f=open(file, "r")
-        textarea.insert(1.0, f.read())
-        f.close
+        try:
+            root.title(os.path.basename(file) + " - Notepad")
+            textarea.delete(1.0,END)
+            f=open(file, "r")
+            textarea.insert(1.0, f.read())
+            f.close
+        except:
+            print("Cannot open this file")
 
 def savefile():
     global file
@@ -56,7 +59,8 @@ def copytext():
 def pastetext():
     textarea.event_generate(("<<Paste>>"))
 def about():
-    showinfo("Notepad","Notepad developed by rishabh srivastava")
+    showinfo(title="Notepad",message="Notepad developed by Rishabh Srivastava")
+
 
 
 
@@ -65,6 +69,7 @@ if __name__ == '__main__':
     root = Tk()
     root.title("Untitled - Notepad")
     root.geometry("600x400")
+    root.minsize(height=200, width=400)
     #add text area
     textarea =  Text(root, font = "lucida 13")
     file = None
@@ -109,17 +114,3 @@ if __name__ == '__main__':
     textarea.config(yscrollcommand=scroll.set)
     
     root.mainloop()
-"""
-import pyttsx3
-
-engine = pyttsx3.init('sapi5')
-voices = engine.getProperty("voices")
-
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
-
-if __name__ == '__main__':
-    for i in range(1, 3000):
-        speak(f"")"""
