@@ -6,7 +6,7 @@ import pyttsx3
 #This comment is added by Piyush Patel
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-
+#this is second change
 def speak():
     global file
     engine.say(textarea.get(1.0, END))
